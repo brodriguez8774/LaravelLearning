@@ -17,6 +17,13 @@ Route::get('/', function () {
 });
 
 
+# Hello World route.
 Route::get('/helloworld/', function() {
     return view('hello_world');
+});
+
+
+# Parameter testing route using id variable.
+Route::get('/id/{id}/', function($id) {
+    echo '<h1>ID: '.$id.'</h1>';
 });
