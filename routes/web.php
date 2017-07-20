@@ -33,3 +33,9 @@ Route::get('/role/',[
     'middleware' => 'role:admin',
     'uses' => 'RoleController@index',
 ]);
+
+
+Route::get('/user/', [
+    'middleware' => 'first',
+    'uses' => 'UserController@showPath'
+]);
