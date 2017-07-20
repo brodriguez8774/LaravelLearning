@@ -25,7 +25,7 @@ indent_size = 4
 
 
 # Set properties for html
-[*.html]
+[*.{html,php}]
 # Set character encoding
 charset = utf-8
 
