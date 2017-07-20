@@ -14,7 +14,12 @@
 
 # Site Index
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+
+# Return var from url.
+Route::get('/var/{var?}/', function($var = 'Cat'){
+    return view('var', ['var' => $var]);
 });
 
 
