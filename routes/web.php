@@ -27,3 +27,9 @@ Route::get('/helloworld/', function() {
 Route::get('/id/{id}/', function($id) {
     echo '<h1>ID: '.$id.'</h1>';
 });
+
+
+Route::get('/role/',[
+    'middleware' => 'role:admin',
+    'uses' => 'RoleController@index',
+]);
