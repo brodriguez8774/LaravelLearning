@@ -1,16 +1,7 @@
-<!doctype html>
-<html lang="{{ config('app.locale') }}">
+@extends('base')
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@section('page-title', '| Hello World')
 
-    <title>Hello World!</title>
-</head>
-
-<body>
-    <h1>Hello World!</h1>
-</body>
-
-</html>
+@section('content')
+  <h1>Hello World!</h1>
+@endsection
