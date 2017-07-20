@@ -12,6 +12,7 @@
 */
 
 
+# Site Index
 Route::get('/', function () {
     return view('welcome');
 });
@@ -29,12 +30,14 @@ Route::get('/id/{id}/', function($id) {
 });
 
 
+# First Middleware/Controller Test.
 Route::get('/role/',[
     'middleware' => 'role:admin',
     'uses' => 'RoleController@index',
 ]);
 
 
+# Second Middleware/Controller Test.
 Route::get('/user/', [
     'middleware' => 'first',
     'uses' => 'UserController@showPath'
