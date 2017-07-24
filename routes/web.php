@@ -48,3 +48,10 @@ Route::get('/user/', [
     'middleware' => 'first',
     'uses' => 'UserController@showPath'
 ]);
+
+
+# Address Routes.
+Route::get('address/', 'AddressController@index');
+Route::get('address/{id}/', 'AddressController@detail')->where('id', '[0-9]+');
+Route::get('address/create/', 'AddressController@create');
+Route::get('address/edit/{id}/', 'AddressController@edit')->where('id', '[0-9]+');
