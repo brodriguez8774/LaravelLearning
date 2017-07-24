@@ -15,6 +15,6 @@ class AddressTableSeeder extends Seeder
          * Create 50 random Addresses using the Address factory class.
          * Saves to db.
          */
-        factory(App\Address::class, 50)->create();
+        factory(App\Models\Address::class, 50)->create();
     }
 }

@@ -13,7 +13,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-$factory->define(App\Address::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Address::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
