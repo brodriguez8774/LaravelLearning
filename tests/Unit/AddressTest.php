@@ -25,4 +25,8 @@ class AddressTest extends TestCase
      * However, it's bad practice/unnecessary to test parts of code that are built
      * into the framework you're using. That should already be done by the framework developers.
      */
+    public function test_dummy_test() {
+        $response = $this->get('/');
+        $response->assertStatus(200);
+    }
 }

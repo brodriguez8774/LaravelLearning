@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-use App\Models as models;
+use \App\Models as models;
 
 /**
  * Feature/Functional Test - A test from the user's perspective.
@@ -19,12 +19,17 @@ use App\Models as models;
  */
 class AddressTest extends TestCase
 {
+    # Have database reset after every test (via dropping table and re-migrating).
+    use DatabaseMigrations;
+
     /**
      * Initial set up.
      *
      * Is run at the start of all other test functions in this class.
      */
-    public function setUp() {
+    public function setUp()
+    {
+        parent::setUp();
         factory(models\Address::class, 50)->create();
     }
 
@@ -32,8 +37,8 @@ class AddressTest extends TestCase
      * Test Url of Address Index.
      */
     public function test_addressUrl_index() {
-        $response = $this->get('/address/');
-        $response ->assertStatus(200);
+        $response = $this->get('/address');
+        $response->assertStatus(200);
     }
 
     /**
@@ -41,7 +46,7 @@ class AddressTest extends TestCase
      */
     public function test_addressUrl_create() {
         $response = $this->get('/address/create');
-        $response ->assertStatus(200);
+        $response->assertStatus(200);
     }
 
     /**
@@ -49,7 +54,7 @@ class AddressTest extends TestCase
      */
     public function test_addressUrl_detail() {
         $response = $this->get('/address/1');
-        $response ->assertStatus(200);
+        $response->assertStatus(200);
     }
 
     /**
@@ -57,6 +62,6 @@ class AddressTest extends TestCase
      */
     public function test_addressUrl_edit() {
         $response = $this->get('/address/edit/1');
-        $response ->assertStatus(200);
+        $response->assertStatus(200);
     }
 }
