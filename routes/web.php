@@ -60,3 +60,8 @@ Route::post('address/', 'AddressController@store');
 Route::get('address/edit/{id}/', 'AddressController@edit')->where('id', '[0-9]+');
 Route::put('address/{id}', 'AddressController@update');
 Route::delete('address/{id}', 'AddressController@delete');
+
+
+# Auth Routes
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
