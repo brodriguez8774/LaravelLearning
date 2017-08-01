@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="{{ config('app.locale') }}">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="{{ mix('/css/base.css')}}">
+  <script src="https://unpkg.com/vue"></script>
+
+
+      <title>Vue Learning | @yield('page-title')</title>
+
+</head>
+
+<body>
+<h1>Vue Index</h1>
+
+  <div id="root">
+    <input type="text" id="input" v-model="message">
+    <p>The value of input is {{ message }}.</p>
+  </div>
+  <script>
+
+  let data = {
+    message: 'Hello World'
+  };
+
+  // Create new Vue to do things. Lives with in #root element.
+  new Vue({
+    el: '#root',
+    data: data,
+  })
+
+  </script>
+</body>
+
+</html>

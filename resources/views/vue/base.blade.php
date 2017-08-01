@@ -7,9 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" type="text/css" href="{{ mix('/css/base.css')}}">
+  <script src="https://unpkg.com/vue"></script>
 
   @section('site-title')
-      <title>Laravel Learning | @yield('page-title')</title>
+      <title>Vue Learning | @yield('page-title')</title>
   @show
 </head>
 
@@ -20,6 +21,8 @@
   <main>
     @yield('content')
   </main>
+  @section('extra-scripts')
+  @show
 </body>
 
 </html>

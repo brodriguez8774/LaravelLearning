@@ -65,3 +65,7 @@ Route::delete('address/{id}', 'AddressController@delete');
 # Auth Routes
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+# Vue Learning Routes
+Route::get('/vue', 'VueController@index');
