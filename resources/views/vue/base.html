@@ -24,7 +24,7 @@
     </div>
 
     <input id="input" type="text" v-model="newName">
-    <button v-on:click="addName">Add Name</button>
+    <button v-on:click="addName" v-bind:title="title">Add Name</button>
 
     <ul>
       <li v-for="name in names" v-text="name"></li>
@@ -45,6 +45,7 @@
         message: 'Hello World',
         newName: '',
         names: ['Joe', 'Mary', 'Jane', 'Jack'],
+        title: 'Now the title is being set through VueJS.',
       },
 
       // Methods to use.
