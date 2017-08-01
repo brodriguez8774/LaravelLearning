@@ -42,6 +42,7 @@ class Address extends Model
      * Less prefered as anything not defined is automatically user-editable (if the user can get to it).
      * protected $guarded = ['formFieldstoBlacklist, field2, etc']
      */
+    protected $fillable = ['street', 'city', 'region', 'zip', 'country'];
 
 
     /**

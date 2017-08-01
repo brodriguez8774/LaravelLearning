@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 use App\Models\Address;
+use App\Http\Requests\AddressRequest;
 
 class AddressController extends Controller
 {
@@ -40,24 +41,12 @@ class AddressController extends Controller
     /**
      * Save the newly created Address model.
      */
-    public function store(Request $request) {
-        # Validate provided fields. Return to form if validation fails.
-        $this->validate($request, [
-            'street' => 'bail|required|max:255',
-            'city' => 'bail|required|max:255',
-            'region' => 'bail|required|max:255',
-            'zip' => 'required',
-            'country' => 'bail|required|max:255'
-        ]);
-
-        # Create and save new model using form fields.
-        $address = new Address;
-        $address->street = $request->street;
-        $address->city = $request->city;
-        $address->region = $request->region;
-        $address->zip = $request->zip;
-        $address->country = $request->country;
-        $address->save();
+    public function store(AddressRequest $request) {
+        # Create and save new model using short syntax.
+        # (See update for long syntax.)
+        $address = Address::create(
+            request(['zip', 'country', 'street', 'city', 'region'])
+        );
 
         # Redirect to next page.
         return Redirect::action('AddressController@index');
@@ -77,16 +66,9 @@ class AddressController extends Controller
     /**
      * Update a given Address model.
      */
-    public function update(Request $request, $id) {
-        $this->validate($request, [
-            'street' => 'bail|required|max:255',
-            'city' => 'bail|required|max:255',
-            'region' => 'bail|required|max:255',
-            'zip' => 'required',
-            'country' => 'bail|required|max:255'
-        ]);
-
-        # Find and update model using form fields.
+    public function update(AddressRequest $request, $id) {
+        # Find and update model using long syntax.
+        # (See store for short version.)
         $address = Address::where('id', $id)->firstOrFail();
         $address->street = $request->street;
         $address->city = $request->city;
