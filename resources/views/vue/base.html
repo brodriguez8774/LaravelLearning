@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" type="text/css" href="{{ mix('/css/base.css')}}">
   <script src="https://unpkg.com/vue"></script>
 
 
-      <title>Vue Learning | @yield('page-title')</title>
+      <title>Vue Learning</title>
 
 </head>
 
@@ -18,22 +17,50 @@
 <h1>Vue Index</h1>
 
   <div id="root">
-    <input type="text" id="input" v-model="message">
-    <p>The value of input is {{ message }}.</p>
+
+    <div style="float:right;">
+      <input type="text" id="input" v-model="message">
+      <p>The value of input is <br>{{ message }}.</p>
+    </div>
+
+    <input id="input" type="text" v-model="newName">
+    <button v-on:click="addName">Add Name</button>
+
+    <ul>
+      <li v-for="name in names" v-text="name"></li>
+    </ul>
+
   </div>
+
+
   <script>
 
-  let data = {
-    message: 'Hello World'
-  };
+    // Create new Vue to do things, called "app".
+    var app = new Vue({
+      // Lives in #root element.
+      el: '#root',
 
-  // Create new Vue to do things. Lives with in #root element.
-  new Vue({
-    el: '#root',
-    data: data,
-  })
+      // The data it starts with.
+      data: {
+        message: 'Hello World',
+        newName: '',
+        names: ['Joe', 'Mary', 'Jane', 'Jack'],
+      },
+
+      // Methods to use.
+      methods: {
+        // Old syntax for browser compatability:
+        // addname: function () {
+        addName() {
+          this.names.push(this.newName);
+          this.newName = '';
+        }
+      },
+    });
 
   </script>
+
+
 </body>
 
 </html>
