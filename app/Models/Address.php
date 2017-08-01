@@ -64,4 +64,20 @@ class Address extends Model
      *  IE: "$post->addComment(request(fieldValue))" inside the CommentController.
      */
 
+    /**
+     * Many to Many Relationships...
+     *
+     * You will want to first create both models involved in the relationship.
+     * Then, create a "pivot table" that is often "<model1Name>_<model2Name>", arranged in alphabetical order.
+     * In this new table, you will want the primary key to be the combined unique id's of both models.
+     *
+     * To call this, you will use
+     * public function modelName() {
+     *      return $this->belongsToMany(connectingTable::class);
+     *  }
+     *
+     * Last, in the database, you connect them in the pivot table via getting an instance of each associated model >
+     * $model1->functionNameAbove()->attach($model2);
+     */
+
 }
