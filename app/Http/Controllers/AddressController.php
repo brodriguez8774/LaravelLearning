@@ -15,6 +15,7 @@ class AddressController extends Controller
      */
     public function index() {
         $addresses = DB::table('addresses')->get();
+        # Equivalent nmto:  $addresses = Address::all();
 
         return view('address/index', ['addresses' => $addresses]);
     }
