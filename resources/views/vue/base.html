@@ -30,6 +30,18 @@
       <li v-for="name in names" v-text="name"></li>
     </ul>
 
+    <br>
+    <br>
+
+    <h2>All Tasks</h2>
+    <ul>
+      <li v-for="task in tasks" v-text="task.description"></li>
+    </ul>
+    <h2>Incomplete Tasks</h2>
+    <ul>
+      <li v-for="task in incompleteTasks" v-text="task.description"></li>
+    </ul>
+
   </div>
 
 
@@ -46,6 +58,12 @@
         newName: '',
         names: ['Joe', 'Mary', 'Jane', 'Jack'],
         title: 'Now the title is being set through VueJS.',
+        tasks: [
+          { description: 'Go to the store', completed: true },
+          { description: 'Finish vue tutorials', completed: false },
+          { description: 'Take a nap', completed: false },
+          { description: 'Clear inbox', completed: true },
+        ],
       },
 
       // Methods to use.
@@ -57,6 +75,13 @@
           this.newName = '';
         }
       },
+
+      // Needs calculation before being rendered.
+      computed: {
+        incompleteTasks() {
+          return this.tasks.filter(task => ! task.completed);
+        }
+      }
     });
 
   </script>
