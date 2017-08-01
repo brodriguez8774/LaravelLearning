@@ -5,9 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * This appears to be the of Djangp's models.py, managed by Eloquent.
+ * This appears to be part of Djangp's models.py, managed by Eloquent.
  * However, each individual model seems to have it's own file, and is created with the command
  * 'php artisan make: model modelNameHere'
+ *
+ * The other half of models.py is actually specified in migrations, oddly enough. And thus used
+ * directly as the literal migrations.
  * @package App
  */
 class Address extends Model

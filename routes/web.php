@@ -20,7 +20,9 @@ Route::get('/', function () {
 
 # Return var from url.
 Route::get('/var/{var?}/', function($var = 'Cat'){
-    return view('var', ['var' => $var]);
+    return view('var', [
+        'var' => $var
+    ]);
 });
 
 
