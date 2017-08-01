@@ -54,8 +54,8 @@ Route::get('/user/', [
 
 # Address Routes.
 Route::get('address/', 'AddressController@index');
-Route::get('address/{id}/', 'AddressController@detail')->where('id', '[0-9]+');
 Route::get('address/create/', 'AddressController@create');
+Route::get('address/{address}/', 'AddressController@detail')->where('id', '[0-9]+');
 Route::post('address/', 'AddressController@store');
 Route::get('address/edit/{id}/', 'AddressController@edit')->where('id', '[0-9]+');
 Route::put('address/{id}', 'AddressController@update');

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
-use App\Models as models;
+use App\Models\Address;
 
 class AddressController extends Controller
 {
@@ -21,9 +21,11 @@ class AddressController extends Controller
 
     /**
      * Show details of an Address model.
+     *
+     * Uses route model binding instead of standard query.
+     * (See edit for standard query.)
      */
-    public function detail($id) {
-        $address = DB::table('addresses')->where('id', $id)->first();
+    public function detail(Address $address) {
         return view('address/detail', ['address' => $address]);
     }
 
@@ -48,7 +50,7 @@ class AddressController extends Controller
         ]);
 
         # Create and save new model using form fields.
-        $address = new models\Address;
+        $address = new Address;
         $address->street = $request->street;
         $address->city = $request->city;
         $address->region = $request->region;
@@ -62,6 +64,9 @@ class AddressController extends Controller
 
     /**
      * Edit a given Address model.
+     *
+     * Uses standard query instead of route model binding.
+     * (See detail for route model binding.)
      */
     public function edit($id) {
         $address = DB::table('addresses')->where('id', $id)->first();
@@ -81,7 +86,7 @@ class AddressController extends Controller
         ]);
 
         # Find and update model using form fields.
-        $address = models\Address::where('id', $id)->firstOrFail();
+        $address = Address::where('id', $id)->firstOrFail();
         $address->street = $request->street;
         $address->city = $request->city;
         $address->region = $request->region;
@@ -98,7 +103,7 @@ class AddressController extends Controller
      */
     public function delete(Request $request, $id) {
         # Select and delete model with given id.
-        models\Address::where('id', $id)->delete();
+        Address::where('id', $id)->delete();
 
         # Redirect to next page.
         return Redirect::action('AddressController@index');
