@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="{{ config('app.locale') }}">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://unpkg.com/vue"></script>
+
+  <title>Vue Learning</title>
+
+  <style>
+    body {
+      background-color: #fcfcfc;
+    }
+
+    h1 {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    .container {
+      position: relative;
+      margin: 20px;
+    }
+
+    li {
+      display: flex;
+    }
+
+    .tabs ul {
+      display: flex;
+      flex-direction: row;
+
+      margin: 0;
+      padding: 0;
+
+      font-size: 125%;
+      font-weight: bold;
+
+      background-color: #f7f7f7;
+      border-top-right-radius: 15px;
+      border-top-left-radius: 15px;
+    }
+
+    .tabs ul li {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      flex: 1;
+
+      list-style: none;
+
+      border-bottom: 1px solid #b3b3b3;
+      border-top-right-radius: 15px;
+      border-top-left-radius: 15px;
+    }
+
+    .tabs ul li a {
+      padding-top: 10px;
+      padding-right: 20px;
+      padding-bottom: 10px;
+      padding-left: 20px;
+
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .active {
+      z-index: 2;
+      text-decoration: underline;
+
+      background-color: #fff;
+      border: 1px solid #b3b3b3;
+      border-bottom: none !important;
+    }
+
+    .tab-details {
+      position: relative;
+      top: -1px;
+      z-index: 1;
+      padding: 20px;
+
+      background-color: #fff;
+      border: 1px solid #b3b3b3;
+    }
+
+    .tab-details li {
+      display: list-item;
+    }
+
+    span {
+      display: inline-block;
+      padding: 10px;
+      height: 18px;
+
+      font-weight: bold;
+      white-space: nowrap;
+
+      background-color: #efefef;
+    }
+
+    hr {
+      border: 1px solid #ddd;
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+  <h1>Vue Index</h1>
+
+  <div id="root" class="container">
+
+    <tabs>
+
+
+      <tab name="Message Input" :selected=true>
+        <p>This tab gets dynamically takes input from box and manipulates other elements accordingly.</p>
+        <input type="text" id="input" v-model="message">
+        <p>The value of input is <span>{{ message }}</span>.</p>
+      </tab>
+
+
+      <tab name="Adding to List">
+        <p>This tab takes input from box (after button click) and dynamically adds to list.</p>
+        <input id="input" type="text" v-model="newName">
+        <button v-on:click="addName" v-bind:title="title">Add Name</button>
+
+        <ul>
+          <li v-for="name in names" v-text="name"></li>
+        </ul>
+      </tab>
+
+
+      <tab name="Computed Values">
+        <p>This tab doesn't do anything dynamic, but is an example of using Vue's "computed" helper.</p>
+        <p>It reads from the values of a list and acts accordingly, on page load.</p>
+        <hr>
+        <p>As stated in the notes section, Computed is for manipulating data when a state change is not present.</p>
+        <p>IE: this task filter is appropriate because it's processed and rendered on page load.</p>
+        <h2>All Tasks</h2>
+        <ul>
+          <li v-for="task in tasks" v-text="task.description"></li>
+        </ul>
+        <h2>Incomplete Tasks</h2>
+        <ul>
+          <li v-for="task in incompleteTasks" v-text="task.description"></li>
+        </ul>
+      </tab>
+
+
+      <tab name="Vue Syntax">
+        <h2>Basic Syntax</h2>
+        <p>
+          <span>v-on:click="methodName"</span> is equivalent to <span>@click</span>. <br>
+          This triggers the given <span>methodName</span> on element click.
+        </p>
+        <hr>
+
+        <p>
+          <span>v-bind:thing="name"</span> is equivalent to <span>:thing="name"</span>. <br>
+          This binds the given vue data element of <span>name</span> to the element property of <span>thing</span>.
+        </p>
+      </tab>
+
+      <tab name="Vue Components">
+
+        <h2>Reason for using Components</h2>
+        <p>
+          Custom Vue Components only seem to be useful if you have repeating html structures that would otherwise be annoying/tedious to manually define. But even then, standard html templating is honestly probably a better option, as it will work regardless of potential issues with any given client's javascript (turned off and/or outdated for whatever reason).
+        </p>
+        <hr>
+
+        <h2>Options Used on this Page</h2>
+        <p>
+          <span>el:</span> - Gets the html ID in which the Vue instance will live. This is so that you can create different Vue instances, and scope each only to a desired section of page.
+        </p>
+        <hr>
+
+        <p>
+          <span>template:</span> - This is only used within custom components. Here, you define the standard html setup of said components. Note that the outermost html must be a single element within a template. Hence the otherwise useless outer div in the "tabs" component of this page.
+        </p>
+        <hr>
+
+        <p>
+          <span>Data() {}</span> - A data object that dynamicaly updates all instances upon being changed. This seems to be the main means by which Vue dynamically changes information on the page.
+        </p>
+        <hr>
+
+        <p>
+          <span>methods: {}</span> - A filter where you define all your user-created methods to manipulate Vue instances. Very helpful for editing your data after page load, for example. Generally is used primarily for triggering state alterations.
+        </p>
+        <hr>
+
+        <p>
+          <span>props: {}</span> - A filter where you explicitly define the properties you set for custom elements. They must be explicitly defined here or else the element will not accept it.
+        </p>
+        <hr>
+
+        <p>
+          <span>created() {}</span> - A hook which activates upon the Vue element being instanced on the page. Appears to be good for debugging if you can't get something to initialize. Or possibly for functions that run only once on page load/set up.
+        </p>
+        <hr>
+
+        <p>
+          <span>mounted() {}</span> - A hook that is very similar to created. The only difference appears to be that it's called when the given Vue instance is actually mounted onto the appropriate page elements. Meanwhile, created appears to be called before replacing page elements, but after the Vue instance is created.
+        </p>
+        <hr>
+
+        <p>
+        <span>computed: {}</span> - A filter where you define and transform data. Similar to the <span>methods</span> filter, except that this doesn't tend to involve state transformations. <br>
+          IE: It would be more appropriate to calculate hrefs from a tab name here than it would be to do so in methods. As this is not a state change, but still data that needs to be calculated.
+        </p>
+
+      </tab>
+
+
+    </tabs>
+
+  </div>
+
+
+
+  <script>
+
+    // Creating a Vue Component for tabs.
+    // Essentially handles all parent/group behavior of tabbing.
+    Vue.component('tabs', {
+
+      template: `
+        <div>
+          <div class="tabs">
+            <ul>
+              <li v-for="tab in tabs" :class="{ 'active': tab.isActive }">
+                <a :href="tab.href" @click=selectTab(tab)>{{ tab.name }}</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="tab-details">
+            <slot></slot>
+          </div>
+        </div>
+      `,
+
+      data() {
+        return { tabs: [] };
+      },
+
+      methods: {
+        selectTab(selectedTab) {
+          this.tabs.forEach(tab => {
+            tab.isActive = (tab.name == selectedTab.name);
+          });
+        }
+      },
+
+      created() {
+        this.tabs = this.$children;
+      },
+
+      mounted() {
+        console.log(this.$children);
+      },
+
+    });
+
+
+    // Create a Vue Component for tab.
+    // Essentially handles all child/singlular behavior of tabbing.
+    Vue.component('tab', {
+
+      template: `
+        <div v-show="isActive"><slot></slot></div>
+      `,
+
+      data() {
+        return { isActive: false }
+      },
+
+      props: {
+        name: {required: true },
+        selected: { default: false },
+      },
+
+      mounted() {
+        this.isActive = this.selected;
+      },
+
+      computed: {
+        href() {
+          return '#' + this.name.toLowerCase().replace(/ /g, '-');
+        }
+      },
+
+    });
+
+
+    // Create new Vue to do things, generically called "app".
+    // Name doesn't matter in this instance. More just an example of being able to name it what you want.
+    var app = new Vue({
+
+      // Lives in #root element.
+      el: '#root',
+
+      // The data it starts with.
+      data: {
+        message: 'Hello World',
+        newName: '',
+        names: ['Joe', 'Mary', 'Jane', 'Jack'],
+        title: 'Now the title is being set through VueJS.',
+        tasks: [
+          { description: 'Go to the store', completed: true },
+          { description: 'Finish vue tutorials', completed: false },
+          { description: 'Take a nap', completed: false },
+          { description: 'Clear inbox', completed: true },
+        ],
+      },
+
+      // Methods to use.
+      methods: {
+        // Old syntax for browser compatability:
+        // addname: function () {
+        addName() {
+          this.names.push(this.newName);
+          this.newName = '';
+        }
+      },
+
+      // Needs calculation before being rendered.
+      computed: {
+        incompleteTasks() {
+          return this.tasks.filter(task => ! task.completed);
+        }
+      }
+    });
+
+  </script>
+
+
+</body>
+
+</html>
