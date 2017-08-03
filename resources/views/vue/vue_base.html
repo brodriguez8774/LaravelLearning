@@ -155,20 +155,23 @@
 
 
       <tab name="Vue Syntax">
+        <input type="text" id="methodName" v-model="methodName">
+        <input type="text" id="propertyName" v-model="propertyName">
+        <input type="text" id="dataName" v-model="dataName">
         <h2>Basic Syntax</h2>
         <p>
-          <span>v-on:click="methodName"</span> is equivalent to <span>@click</span>. <br>
-          This triggers the given <span>methodName</span> on element click.
+          <span>v-on:click="{{ methodName }}"</span> is equivalent to <span>@click="{{ methodName }}"</span>. <br>
+          This triggers the given <span>{{ methodName }}</span> on element click.
         </p>
         <hr>
 
         <p>
-          <span>v-bind:thing="name"</span> is equivalent to <span>:thing="name"</span>. <br>
-          This binds the given vue data element of <span>name</span> to the element property of <span>thing</span>.
+          <span>v-bind:{{ propertyName }}="{{ dataName }}"</span> is equivalent to <span>:{{ propertyName }}="{{ dataName }}"</span>. <br>
+          This binds the given vue data element of <span>{{ dataName }}</span> to the element property of <span>{{ propertyName }}</span>.
         </p>
         <hr>
         <p>
-          <span>v-text="dataName"</span> is equavalent to <span>{ dataName }</span>. They both essentialy take a given Vue dataset of dataName and dynamically populate the page accordingly.
+          <span>v-text="{{ dataName }}"</span> is equavalent to <span>{ {{ dataName }} }</span>. They both essentialy take a given Vue dataset of dataName and dynamically populate the page accordingly.
         </p>
         <p>
           Note: So that vue doesn't try to read the syntax, only one curly brace has been used on this page. The standard syntax is to use double, IE <span>{{</span>.
@@ -182,6 +185,7 @@
           To fix this, either preface the markup with the @ symbol (such as <span>@{ variableHere }</span>) or instead use the <span>v-text</span> markup.
         </p>
       </tab>
+
 
       <tab name="Vue Components">
 
@@ -234,16 +238,18 @@
 
       </tab>
 
+
       <tab name="Events and Listeners">
+        <input type="text" id="eventName" v-model="eventName">
         <p>From within the <span>methods</span> filter...</p>
         <hr>
         <p>
-          <span>this.$emit('eventName')</span> - Emits an event of eventName
+          <span>this.$emit("{{ eventName }}")</span> - Emits an event of eventName
         </p>
         <hr>
 
         <p>
-          <span>this.$on('eventName', function() {})</span> - Listens for an event of eventName and responds accordingly.
+          <span>this.$on("{{ eventName }}", function() {})</span> - Listens for an event of eventName and responds accordingly.
         </p>
         <hr>
 
@@ -252,6 +258,7 @@
         <p>Then you can call Event.$emit or Event.$on to create/access global events from within any component.</p>
 
       </tab>
+
 
       <tab name="Ajax Requests">
         <p>
@@ -368,6 +375,10 @@
           { description: 'Take a nap', completed: false },
           { description: 'Clear inbox', completed: true },
         ],
+        methodName: "methodName",
+        propertyName: "propertyName",
+        dataName: "dataName",
+        eventName: "eventName",
       },
 
       // Methods to use.
