@@ -93,7 +93,7 @@
 
     span {
       display: inline-block;
-      padding: 10px;
+      padding: 7px;
       height: 18px;
 
       font-weight: bold;
@@ -119,14 +119,14 @@
     <tabs>
 
 
-      <tab name="Message Input" :selected=true>
+      <tab name="Binding Values" :selected=true>
+        <h2>Message Input</h2>
         <p>This tab gets dynamically takes input from box and manipulates other elements accordingly.</p>
         <input type="text" id="input" v-model="message">
         <p>The value of input is <span>{{ message }}</span>.</p>
-      </tab>
+        <hr>
 
-
-      <tab name="Adding to List">
+        <h2>Adding to List</h2>
         <p>This tab takes input from box (after button click) and dynamically adds to list.</p>
         <input id="input" type="text" v-model="newName">
         <button v-on:click="addName" v-bind:title="title">Add Name</button>
@@ -137,7 +137,7 @@
       </tab>
 
 
-      <tab name="Computed Values">
+      <tab name="Computing Values">
         <p>This tab doesn't do anything dynamic, but is an example of using Vue's "computed" helper.</p>
         <p>It reads from the values of a list and acts accordingly, on page load.</p>
         <hr>
@@ -165,6 +165,21 @@
         <p>
           <span>v-bind:thing="name"</span> is equivalent to <span>:thing="name"</span>. <br>
           This binds the given vue data element of <span>name</span> to the element property of <span>thing</span>.
+        </p>
+        <hr>
+        <p>
+          <span>v-text="dataName"</span> is equavalent to <span>{ dataName }</span>. They both essentialy take a given Vue dataset of dataName and dynamically populate the page accordingly.
+        </p>
+        <p>
+          Note: So that vue doesn't try to read the syntax, only one curly brace has been used on this page. The standard syntax is to use double, IE <span>{{</span>.
+        </p>
+        <hr>
+        <h2>Interaction with Laravel</h2>
+        <p>
+          Because both Vue and Laravel's Blade Template use the <span>{ }</span> tags, the one that handles server-side gets priority. That means that any time you attempt to use this markup for Vue, Laravel sees it first and throws an error.
+        </p>
+        <p>
+          To fix this, either preface the markup with the @ symbol (such as <span>@{ variableHere }</span>) or instead use the <span>v-text</span> markup.
         </p>
       </tab>
 
@@ -217,6 +232,39 @@
           IE: It would be more appropriate to calculate hrefs from a tab name here than it would be to do so in methods. As this is not a state change, but still data that needs to be calculated.
         </p>
 
+      </tab>
+
+      <tab name="Events and Listeners">
+        <p>From within the <span>methods</span> filter...</p>
+        <hr>
+        <p>
+          <span>this.$emit('eventName')</span> - Emits an event of eventName
+        </p>
+        <hr>
+
+        <p>
+          <span>this.$on('eventName', function() {})</span> - Listens for an event of eventName and responds accordingly.
+        </p>
+        <hr>
+
+        <h2>Emitting and Listening Universally</h2>
+        <p>First, at the top of your script file, create a Vue of <span>window.Event = new Vue();</span></p>
+        <p>Then you can call Event.$emit or Event.$on to create/access global events from within any component.</p>
+
+      </tab>
+
+      <tab name="Ajax Requests">
+        <p>
+          Vue doesn't appear to explicitly support JSON requests out of the box, so you'll want to instead use JQuery functions such as <span>$.getJson()</span>.
+        </p>
+        <hr>
+        <p>
+          To get data as JSON, specify a <span>get</span> route and simply have it return an array. By default, Laravel will automatically convert this into a JSON.
+        </p>
+        <hr>
+        <p>
+          To send data as JSON, format properly and send to desired <span>post</span> route.
+        </p>
       </tab>
 
 
