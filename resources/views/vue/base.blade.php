@@ -6,8 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" type="text/css" href="{{ mix('/css/base.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{ mix('/css/base.css') }}">
   <script src="https://unpkg.com/vue"></script>
+
+  @section('extra-styles')
+  @show
 
   @section('site-title')
       <title>Vue Learning | @yield('page-title')</title>
