@@ -106,6 +106,12 @@
       border: 1px solid #ddd;
     }
 
+    #root>p {
+      font-size: 80%;
+      font-style: italic;
+      text-align: center;
+    }
+
   </style>
 
 </head>
@@ -128,7 +134,7 @@
 
         <h2>Adding to List</h2>
         <p>This tab takes input from box (after button click) and dynamically adds to list.</p>
-        <input id="input" type="text" v-model="newName">
+        <input type="text" v-model="newName">
         <button v-on:click="addName" v-bind:title="title">Add Name</button>
 
         <ul>
@@ -155,9 +161,9 @@
 
 
       <tab name="Vue Syntax">
-        <input type="text" id="methodName" v-model="methodName">
-        <input type="text" id="propertyName" v-model="propertyName">
-        <input type="text" id="dataName" v-model="dataName">
+        <input type="text" v-model="methodName">
+        <input type="text" v-model="propertyName">
+        <input type="text" v-model="dataName">
         <h2>Basic Syntax</h2>
         <p>
           <span>v-on:click="{{ methodName }}"</span> is equivalent to <span>@click="{{ methodName }}"</span>. <br>
@@ -174,7 +180,11 @@
           <span>v-text="{{ dataName }}"</span> is equavalent to <span>{ {{ dataName }} }</span>. They both essentialy take a given Vue dataset of dataName and dynamically populate the page accordingly.
         </p>
         <p>
-          Note: So that vue doesn't try to read the syntax, only one curly brace has been used on this page. The standard syntax is to use double, IE <span>{{</span>.
+          Note: So that vue doesn't try to read the syntax, only one curly brace has been used on this page. The standard syntax is to use double, IE <span>{{</span>
+        </p>
+        <hr>
+        <p>
+          <span>v-model="{{ dataName }}"</span> will dynamically bind the given vue data of {{ dataName }} to the element it is defined within. According to documentation, it will also "pick the correct way to update the element based on input type."
         </p>
         <hr>
         <h2>Interaction with Laravel</h2>
@@ -191,7 +201,10 @@
 
         <h2>Reason for using Components</h2>
         <p>
-          Custom Vue Components only seem to be useful if you have repeating html structures that would otherwise be annoying/tedious to manually define. But even then, standard html templating is honestly probably a better option, as it will work regardless of potential issues with any given client's javascript (turned off and/or outdated for whatever reason).
+          Custom Vue Components only seem to be useful if you have repeating html structures that would otherwise be annoying/tedious to manually define. But even then, standard html templating is probably a better option, as it will work regardless of potential issues with any given client's javascript (turned off and/or outdated for whatever reason).
+        </p>
+        <p>
+          The only instance where this might be useful is if you have html that could be structured into a template, but specifically do not want to put said data into a database. Such as how this page is set up.
         </p>
         <hr>
 
@@ -275,8 +288,25 @@
       </tab>
 
 
+      <tab name="Vue Testing">
+        <p>
+          I don't believe PHPUnit is a very good means to test JavaScript specific code (although admittedly, I haven't tried yet, so I may be wrong on this).
+        </p>
+        <p>
+          Of course, you can simply use a browser-based testing framework, such as laravel's dusk.
+          However, dusk isn't exactly the fastest, and if your site is large, it may become encumbersome to run the tests every time you change code, due to how long it may take to run.
+        </p>
+        <p>
+          An alternative is to use a testing framework that is spcifically made for testing JavaScript. <a href="https://laracasts.com/series/learn-vue-2-step-by-step/episodes/30">This video series</a> seems to recomend using <a href="https://github.com/avajs/ava">the Ava test framework</a> which seems to have been made for npm, which you're going to have anyways if you're working with Vue.
+        </p>
+      </tab>
+
+
     </tabs>
 
+    <p>
+      For more detail on anything regarding the <a href="https://vuejs.org/">VueJs</a> language, reference <a href="https://laracasts.com/series/learn-vue-2-step-by-step">this video series</a> and/or the <a href="https://vuejs.org/v2/guide/">Vue Docs</a>.
+    </p>
   </div>
 
 
