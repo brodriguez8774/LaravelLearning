@@ -4,6 +4,6 @@
 
 @section('content')
   @foreach ($names as $name)
-    <p>{{ $name->firstName }}&#9;{{ $name->lastName}}</p>
+    {{ $name->lastName }}&#9;{{ $name->firstName }}<br>
   @endforeach
 @endsection
