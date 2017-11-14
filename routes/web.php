@@ -69,3 +69,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 # Vue Learning Routes
 Route::get('/vue', 'VueController@index');
+
+
+# Random Name Generator.
+Route::get('namegenerator/{number}', 'NameGenerator@index')->where('number', '[0-9]+');
